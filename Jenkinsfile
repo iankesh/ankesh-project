@@ -8,7 +8,6 @@ pipeline {
                     export PATH=$JAVA_HOME/bin:$PATH
                     export M2_HOME="/usr/share/maven"
                     export PATH=$M2_HOME/bin:$PATH
-                    
                     echo "JAVA_HOME = $JAVA_HOME"
                     echo "M2_HOME = $M2_HOME"
                 ''' 
@@ -17,15 +16,8 @@ pipeline {
         stage('Build') { 
             steps { 
                sh '''
-               mvn -Dmaven.test.failure.ignore=true install
-               echo "JAVA_HOME = $JAVA_HOME"
-               echo "M2_HOME = $M2_HOME"
+               mvn clean install -Dmaven.test.failure.ignore=true
                '''
-            }
-            post {
-                success {
-                    junit 'server/target/surefire-reports/**/*.xml' 
-                }
             }
         }
         stage('Test - Junit') { 
