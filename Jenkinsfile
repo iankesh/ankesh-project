@@ -1,7 +1,7 @@
 pipeline { 
     agent any
     stages {
-        stage ('Initialize') {
+        stage ('Initialize - GitHub') {
             steps {
                 sh '''
                     export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-arm64"
@@ -13,7 +13,7 @@ pipeline {
                 ''' 
             }
         }
-        stage('Build') { 
+        stage('Build - Maven') { 
             steps { 
                sh '''
                mvn clean install -Dmaven.test.failure.ignore=true
@@ -25,7 +25,7 @@ pipeline {
                junit 'server/target/surefire-reports/**/*.xml'
             }
         }
-        stage('Deploy') { 
+        stage('Deploy - Apache Tomcat') { 
             steps { 
                deploy adapters: [tomcat9(url: 'http://localhost:8081/', 
                               credentialsId: 'tomcat')], 
