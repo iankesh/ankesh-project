@@ -4,14 +4,16 @@ pipeline {
         stage ('Initialize') {
             steps {
                 sh '''
-                    pwd
-                    mvn clean install
+                    echo "JAVA_HOME = $JAVA_HOME"
+                    echo "M2_HOME = $M2_HOME"
                 ''' 
             }
         }
         stage('Build') { 
             steps { 
-               echo 'This is a minimal pipeline.' 
+               sh '''
+               mvn -Dmaven.test.failure.ignore=true install
+               '''
             }
         }
     }
