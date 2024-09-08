@@ -15,6 +15,11 @@ pipeline {
                mvn -Dmaven.test.failure.ignore=true install
                '''
             }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml' 
+                }
+            }
         }
     }
 }
