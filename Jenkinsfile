@@ -1,6 +1,13 @@
 pipeline { 
     agent any
     stages {
+        stage ('Start Time') {
+            steps {
+                sh '''
+                    date
+                ''' 
+            }
+        }
         stage ('Initialize - GitHub') {
             steps {
                 sh '''
@@ -31,6 +38,13 @@ pipeline {
                               credentialsId: 'tomcat')], 
                      war: '**/*.war',
                     contextPath: 'app'
+            }
+        }
+        stage ('End Time') {
+            steps {
+                sh '''
+                    date
+                ''' 
             }
         }
     }
