@@ -47,6 +47,14 @@ pipeline {
                junit 'server/target/surefire-reports/**/*.xml'
             }
         }
+        stage('FinOps - Infracost') { 
+            steps { 
+               sh '''
+               infracost --version
+               infracost breakdown --path infra/
+               '''
+            }
+        }
         stage('Deploy - Apache Tomcat') { 
             steps { 
                deploy adapters: [tomcat9(url: 'http://localhost:8081/', 
