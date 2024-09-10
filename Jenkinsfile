@@ -51,6 +51,7 @@ pipeline {
             steps { 
                sh '''
                infracost --version
+               infracost configure get api_key
                infracost breakdown --path infra/
                '''
             }
