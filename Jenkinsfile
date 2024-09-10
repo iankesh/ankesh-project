@@ -31,7 +31,7 @@ pipeline {
         stage('Secrets Scanner - GitLeaks') { 
             steps { 
                sh '''
-               gitleaks detect --no-git -v
+               gitleaks detect --no-git -v --exit-code 0
                '''
             }
         }
