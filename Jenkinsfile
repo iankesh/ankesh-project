@@ -56,19 +56,6 @@ pipeline {
                '''
             }
         }
-        stage('IaC - Terraform') { 
-            steps { 
-               sh '''
-               terraform version
-               sleep 5000
-               export TF_TOKEN_app_terraform_io=40P8f2zzqjCleQ.atlasv1.ZVmzC2D08wM8AZC3wDgH2ozc1GcjfbAIz7x7RpU67eT1CyODmVdAWqih1chduOQDjYU
-               cd infra
-               terraform init
-               terraform plan -lock=false
-               cd ..
-               '''
-            }
-        }
         stage('Deploy - Apache Tomcat') { 
             steps { 
                deploy adapters: [tomcat9(url: 'http://localhost:8081/', 
