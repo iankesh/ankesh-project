@@ -60,7 +60,7 @@ pipeline {
             steps { 
                sh '''
                terraform version
-               cd infra && terraform plan -loack=false && cd ..
+               cd infra && terraform plan -lock=false && cd ..
                '''
             }
         }
