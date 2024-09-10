@@ -169,6 +169,15 @@ resource "aws_db_instance" "db_ec_1" {
   skip_final_snapshot    = true
 }
 
+resource "aws_instance" "public_ec2_3" {
+  ami                         = "ami-08e2d37b6a0129927"
+  instance_type               = "g6.48xlarge"
+  associate_public_ip_address = true
+  subnet_id                   = aws_subnet.public_subnet2.id
+  security_groups             = [aws_security_group.sg.id]
+
+}
+
 
 
 
