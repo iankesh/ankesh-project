@@ -51,7 +51,7 @@ pipeline {
             steps { 
                sh '''
                infracost --version
-               infracost configure get api_key
+               infracost configure set api_key ico-jleTjQ1erlC5fXfHsJK5gumDcIGAX8Aj
                infracost breakdown --path infra/
                '''
             }
