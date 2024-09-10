@@ -56,7 +56,7 @@ pipeline {
                '''
             }
         }
-        stage('FinOps - Infracost') { 
+        stage('IaC - Terraform') { 
             steps { 
                sh '''
                terraform version
