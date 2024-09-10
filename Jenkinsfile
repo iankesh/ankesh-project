@@ -61,6 +61,14 @@ pipeline {
                junit 'server/target/surefire-reports/**/*.xml'
             }
         }
+        stage('IaC Scan - Terrascan') { 
+            steps { 
+               sh '''
+               terrascan --version
+               terrascan -l infra/
+               '''
+            }
+        }
         stage('FinOps - Infracost') { 
             steps { 
                sh '''
