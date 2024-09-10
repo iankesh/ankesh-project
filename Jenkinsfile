@@ -20,6 +20,13 @@ pipeline {
                 ''' 
             }
         }
+        stage('Secrets Scanner - TruffleHog') { 
+            steps { 
+               sh '''
+               trufflehog filesystem .
+               '''
+            }
+        }
         stage('Build - Maven') { 
             steps { 
                sh '''
