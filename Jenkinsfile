@@ -35,6 +35,13 @@ pipeline {
                '''
             }
         }
+        stage('SAST - Sonarqube') { 
+            steps { 
+               sh '''
+               mvn clean verify sonar:sonar   -Dsonar.projectKey=devsecfinops   -Dsonar.host.url=http://localhost:9000   -Dsonar.login=sqp_dc6e52d5bcf247728e9613bd6f027d36de1765a1
+               '''
+            }
+        }
         stage('OWASP Dependency Check') { 
             steps { 
                sh '''
