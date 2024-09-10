@@ -23,11 +23,8 @@ pipeline {
         stage('Secrets Scanner - TruffleHog') { 
             steps { 
                sh '''
-               ls -la
-               pwd
                trufflehog --version
-               sleep 5000
-               trufflehog filesystem .
+               trufflehog git https://github.com/iankesh/ankesh-project --no-update
                '''
             }
         }
