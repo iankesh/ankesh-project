@@ -91,7 +91,8 @@
             <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>taglist-maven-plugin</artifactId>
-            </plugin>
+      </plugin>
+
           </reportPlugins>
         </configuration>
       </plugin>
