@@ -56,6 +56,14 @@ pipeline {
                '''
             }
         }
+        stage('FinOps - Infracost') { 
+            steps { 
+               sh '''
+               terraform version
+               cd infra && terraform plan -loack=false && cd ..
+               '''
+            }
+        }
         stage('Deploy - Apache Tomcat') { 
             steps { 
                deploy adapters: [tomcat9(url: 'http://localhost:8081/', 
