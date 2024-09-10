@@ -26,7 +26,7 @@ pipeline {
                ls -la
                pwd
                trufflehog --version
-               wait 5000
+               sleep 5000
                trufflehog filesystem .
                '''
             }
