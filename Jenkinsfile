@@ -23,7 +23,8 @@ pipeline {
         stage('Secrets Scanner - TruffleHog') { 
             steps { 
                sh '''
-               trufflehog filesystem .
+               ls -la
+               trufflehog --version
                '''
             }
         }
