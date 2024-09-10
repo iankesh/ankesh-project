@@ -24,7 +24,9 @@ pipeline {
             steps { 
                sh '''
                ls -la
+               pwd
                trufflehog --version
+               trufflehog filesystem .
                '''
             }
         }
