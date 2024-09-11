@@ -86,6 +86,14 @@ pipeline {
                     contextPath: 'app'
             }
         }
+        stage('DAST - OWASP ZAP Scan') { 
+            steps { 
+               sh '''
+               bash /opt/zaproxy/zap.sh -version
+               bash /opt/zaproxy/zap.sh -daemon -quickurl "http://localhost:8081" -quickout /home/ankesh/Downloads/zap_results.html -port 8082 -quickprogress
+               '''
+            }
+        }
         stage ('End Time') {
             steps {
                 sh '''
