@@ -86,6 +86,14 @@ pipeline {
                     contextPath: 'app'
             }
         }
+        stage('DAST - Nikto Scan') { 
+            steps { 
+               sh '''
+               nikto -Version
+               nikto -h http://localhost:8081/app -output nikto-output.html
+               '''
+            }
+        }
         stage('DAST - OWASP ZAP Scan') { 
             steps { 
                sh '''
