@@ -20,7 +20,7 @@ pipeline {
                 ''' 
             }
         }
-        stage('Secrets Scanner - TruffleHog') { 
+        stage('SCA - TruffleHog') { 
             steps { 
                sh '''
                trufflehog --version
@@ -28,10 +28,17 @@ pipeline {
                '''
             }
         }
-        stage('Secrets Scanner - GitLeaks') { 
+        stage('SCA - GitLeaks') { 
             steps { 
                sh '''
                gitleaks detect --no-git -v --exit-code 0
+               '''
+            }
+        }
+        stage('SCA - OWASP Dependency Check') { 
+            steps { 
+               sh '''
+               mvn dependency-check:aggregate
                '''
             }
         }
@@ -39,13 +46,6 @@ pipeline {
             steps { 
                sh '''
                mvn clean verify sonar:sonar   -Dsonar.projectKey=devsecfinops   -Dsonar.host.url=http://localhost:9000   -Dsonar.login=sqp_dc6e52d5bcf247728e9613bd6f027d36de1765a1
-               '''
-            }
-        }
-        stage('OWASP Dependency Check') { 
-            steps { 
-               sh '''
-               mvn dependency-check:aggregate
                '''
             }
         }
@@ -69,7 +69,7 @@ pipeline {
                '''
             }
         }
-        stage('FinOps - Infracost') { 
+        stage('FinOps Scan - Infracost') { 
             steps { 
                sh '''
                infracost --version
